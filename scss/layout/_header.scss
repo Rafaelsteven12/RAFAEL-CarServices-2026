@@ -1,0 +1,87 @@
+@use "../abstract/" as *;
+@use "../base/" as *;
+
+.header {
+  position: relative;
+  z-index: 99;
+  &__wrapper {
+    @include between;
+  }
+  &__logo {
+    a > h4 {
+      
+      font-size: clamp(2rem, 5vw, 1.5rem);
+      color: $clr--light;
+      font-family: $font--secondary;
+      font-weight: normal;
+      
+    }
+    img {
+      vertical-align: top;
+      height: 15rem;
+    }
+  }
+  &__nav {
+    ul {
+      display: flex;
+      gap: 3rem;
+      align-items: center;
+      position: absolute;
+      left: 80rem;
+      li a {
+        color: $clr--light;
+        font-family: $font--primary;
+      }
+      @include mediaQuery(520px) {
+        background-color: $clr--dark;
+        height: 100vh;
+        width: 100%;
+        position: fixed;
+        right: -100%;
+        z-index: 99;
+        margin-top: 4rem;
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        transition: all 0.5s ease-in-out;
+        padding-top: 5rem;
+        li a {
+          color: $clr--light;
+        }
+      }
+    }
+    @include mediaQuery(520px) {
+      &.open ul {
+        right: 0;
+        transition: all 0.5s ease-in-out;
+      }
+    }
+  }
+  .toggle_menu {
+    display: none;
+    span {
+      color: $clr--dark;
+      background-color: $clr--dark;
+      width: 2.5rem;
+      height: 0.1rem;
+      border: 2px solid $clr--dark;
+      border-radius: 1rem;
+    }
+    @include mediaQuery(520px) {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      &.open span:first-child {
+        transform: translate(0, 10px) rotate(225deg);
+        transition: 0.5s ease;
+      }
+      &.open span:nth-child(2) {
+        opacity: 0;
+      }
+      &.open span:last-child {
+        transform: translate(0, -13.5px) rotate(-225deg);
+        transition: 0.5s ease;
+      }
+    }
+  }
+}
